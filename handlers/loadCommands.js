@@ -10,7 +10,7 @@ function loadCommands(client) {
         for (const file of commandFiles) {
             const command = require(`../commands/${folder}/${file}`);
             if (command.name) {
-                client.command.set(command.name, command);
+                client.commands.set(command.name, command);
                 console.log(`Command ${command.name} registed as ${command}!`);
             } else {
                 console.log(`A command failed to load!`);
