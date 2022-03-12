@@ -16,6 +16,14 @@ const client = new Client({
 
 loadCommands(client);
 
+client.commands = new Collection();
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+    const command = require(`./commands/${file}`);
+    client.commands.set(command.data.name, command);
+}
+
 client.login(TOKEN)
     .then(function() {
         console.log(`Successfully logged in as ${client.user.username}#${client.user.discriminator}`);
