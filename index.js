@@ -1,28 +1,39 @@
 const { Client, Collection, MessageEmbed, Intents } = require("discord.js");
 const { Routes } = require("discord-api-types/v9");
 const { REST } = require("@discordjs/rest");
-const { loadCommands } = require("./handlers/loadCommands");
 const fs = require("node:fs");
+const { loadCommands } = require("./handlers/loadCommands");
+const { CLIENT_ID, GUILD_ID, TOKEN } = require("./config.json");
 
-const config = process.env;
-const client = new Client( {
-        allowedMentions: {
-            parse: ["users", "roles"]
-        },
-        intents: [
-            Intents.FLAGS.GUILDS,
-            Intents.FLAGS.GUILD_MESSAGES
-        ]
-    }
-);
-
-client.commands = new Collection();
-client.slashCommands = new Collection();
+const client = new Client({
+    allowedMentions: {
+        parse: ["users", "roles"]
+    }, intents: [
+        Intents.FLAGS.GUILDS,
+        Intents.FLAGS.GUILD_MESSAGES
+    ]
+});
 
 loadCommands(client);
 
-client.login(config["TOKEN"])
+client.login(TOKEN)
     .then(function() {
         console.log(`Successfully logged in as ${client.user.username}#${client.user.discriminator}`);
-    }
-);
+    });
+
+client.once('ready', function() {
+    console.log('Ready!');
+});
+    
+client.on('interactionCreate', async function(interaction) {
+	if (!interaction.isCommand()) return;
+	const command = client.commands.get(interaction.commandName);
+	if (!command) return;
+
+	try {
+		await command.execute(interaction);
+	} catch (error) {
+		console.error(error);
+		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+	}
+});

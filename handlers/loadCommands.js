@@ -1,22 +1,13 @@
 function loadCommands(client) {
-    const fs = require("fs");
-    const commandFolders = fs.readdirSync("./commands");
-    for (const folder of commandFolders) {
-        const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(
-            function(file) {
-                file.endsWith(".js");
-            }
-        );
-        for (const file of commandFiles) {
-            const command = require(`../commands/${folder}/${file}`);
-            if (command.name) {
-                client.commands.set(command.name, command);
-                console.log(`Command ${command.name} registed as ${command}!`);
-            } else {
-                console.log(`A command failed to load!`);
-                continue;
-            }
-        }
+    const { Collection } = require("discord.js");
+    const fs = require("node:fs");
+
+    client.commands = new Collection();
+    const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+    
+    for (const file of commandFiles) {
+        const command = require(`./commands/${file}`);
+        client.commands.set(command.data.name, command);
     }
 }
 
