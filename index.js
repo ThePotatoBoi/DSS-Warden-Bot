@@ -2,7 +2,7 @@ const { Client, Collection, MessageEmbed, Intents } = require("discord.js");
 const { Routes } = require("discord-api-types/v9");
 const { REST } = require("@discordjs/rest");
 const fs = require("node:fs");
-const { loadCommands } = require("./handlers/loadCommands");
+const { loadCommands } = require("./handlers/loadSlashCommands");
 const { CLIENT_ID, GUILD_ID, TOKEN } = require("./config.json");
 const { loadEvents } = require("./handlers/loadEvents");
 
