@@ -1,3 +1,4 @@
+const { CommandInteraction } = require("discord.js");
 const { DSS_ALTERBLADE_CHANNEL_ID, PREFIX } = require("../config.json");
 
 module.exports = {
@@ -6,6 +7,7 @@ module.exports = {
         var x = [message, client];
 
 		if (message.content.startsWith(PREFIX)) {
+
             const messageStr = message.content.substring(4).split(" ");
             const args = [];
 
@@ -16,12 +18,12 @@ module.exports = {
             const channel = client.channels.cache.get(message.channelId);
             channel.send("I received something: " + args);
 
-            client.commands = new Collection();
-            const commandFiles = fs.readdirSync('./slashCommands').filter(file => file.endsWith('.js'));
-            
-            for (const file of commandFiles) {
-                const command = require(`../slashCommands/${file}`);
-                client.slashCommands.set(command.data.name, command);
+            const command = client.commands.get(args[0]);
+
+            try {
+                command.execute(client, "", "");
+            } catch(error) {
+                channel.send("KOMRAD! I don't have that command!");
             }
 
         }
