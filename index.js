@@ -20,7 +20,7 @@ loadSlashCommands(client);
 loadEvents(client);
 loadCommands(client);
 
-client.login(TOKEN)
+client.login(process.env.TOKEN)
     .then(function() {
         console.log(`Successfully logged in as ${client.user.username}#${client.user.discriminator}`);
     });
