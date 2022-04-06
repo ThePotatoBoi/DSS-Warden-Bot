@@ -1,4 +1,4 @@
-function loadCommands(client) {
+function loadSlashCommands(client) {
     const { Collection } = require("discord.js");
     const fs = require("node:fs");
 
@@ -11,4 +11,4 @@ function loadCommands(client) {
     }
 }
 
-module.exports = { loadCommands };
+module.exports = { loadSlashCommands };

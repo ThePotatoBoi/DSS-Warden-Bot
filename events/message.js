@@ -17,11 +17,12 @@ module.exports = {
 
             const channel = client.channels.cache.get(message.channelId);
             channel.send("I received something: " + args);
-
+            
             const command = client.commands.get(args[0]);
+            if (!command) return;
 
             try {
-                command.execute(client, "", "");
+                command.execute(client, channel, "", "");
             } catch(error) {
                 channel.send("KOMRAD! I don't have that command!");
             }
