@@ -14,7 +14,7 @@ module.exports = {
 			"Uwugaboogaloo",
 			"#NoToPurple",
 			"Dang panget >:[",
-			""
+			"f@W3r abYözxc kA!!,,.."
 		];
 		client.user.setPresence({ status: "online" });
 		setInterval(function() {

@@ -4,7 +4,6 @@ const { REST } = require("@discordjs/rest");
 const fs = require("node:fs");
 const { loadSlashCommands } = require("./handlers/loadSlashCommands");
 const { loadCommands } = require("./handlers/loadCommands");
-const { CLIENT_ID, GUILD_ID, TOKEN } = require("./config.json");
 const { loadEvents } = require("./handlers/loadEvents");
 
 const client = new Client({
