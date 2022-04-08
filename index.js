@@ -15,15 +15,11 @@ const client = new Client({
     ]
 });
 
-//
-process.env.TOKEN = "OTQ5MjYyNzQyNjQzMTU5MTEw.YiHz0g.FabOc9UJ4j5Mfa8WYPDiHA8Zd5Y";
-//
-
 loadSlashCommands(client);
 loadEvents(client);
 loadCommands(client);
 
-client.login(process.env.TOKEN)
+client.login(TOKEN)
     .then(function() {
         console.log(`Successfully logged in as ${client.user.username}#${client.user.discriminator}`);
     });
