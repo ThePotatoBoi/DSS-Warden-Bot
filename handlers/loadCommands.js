@@ -7,7 +7,7 @@ function loadCommands(client) {
     
     for (const file of commandFiles) {
         const command = require(`../commands/${file}`);
-        client.slashCommands.set(command.name, command);
+        client.commands.set(command.name, command);
     }
 }
 

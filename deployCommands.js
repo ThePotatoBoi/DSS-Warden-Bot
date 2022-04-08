@@ -11,7 +11,7 @@ for (const file of commandFiles) {
 	commands.push(command.data.toJSON());
 }
 
-const rest = new REST({ version: '9' }).setToken(TOKEN);
+const rest = new REST({ version: '9' }).setToken("OTQ5MjYyNzQyNjQzMTU5MTEw.YiHz0g.FabOc9UJ4j5Mfa8WYPDiHA8Zd5Y");
 
 rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), { body: commands })
 	.then(() => console.log('Successfully registered application commands.'))
